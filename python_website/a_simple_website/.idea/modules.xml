@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/a_simple_website.iml" filepath="$PROJECT_DIR$/.idea/a_simple_website.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../flask_test/.idea/flask_test.iml" filepath="$PROJECT_DIR$/../flask_test/.idea/flask_test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../.idea/github.iml" filepath="$PROJECT_DIR$/../.idea/github.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../import_export/.idea/import_export.iml" filepath="$PROJECT_DIR$/../import_export/.idea/import_export.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../import_export_revision_dict_pandas/.idea/import_export_revision_dict_pandas.iml" filepath="$PROJECT_DIR$/../import_export_revision_dict_pandas/.idea/import_export_revision_dict_pandas.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../my_web_site/.idea/my_web_site.iml" filepath="$PROJECT_DIR$/../my_web_site/.idea/my_web_site.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../overlap/.idea/overlap.iml" filepath="$PROJECT_DIR$/../overlap/.idea/overlap.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../product_forest/.idea/product_forest.iml" filepath="$PROJECT_DIR$/../product_forest/.idea/product_forest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../programming_in_python/.idea/programming_in_python.iml" filepath="$PROJECT_DIR$/../programming_in_python/.idea/programming_in_python.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../some_tools/.idea/some_tools.iml" filepath="$PROJECT_DIR$/../some_tools/.idea/some_tools.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../test/.idea/test.iml" filepath="$PROJECT_DIR$/../test/.idea/test.iml" />
+    </modules>
+  </component>
+</project>

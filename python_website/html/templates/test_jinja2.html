@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% for item in seq %}
+        <li>{% block loop_item scoped%}{{ item }}{% endblock %}</li>
+    {% endfor %}
+    {{ '{{' }}<br>
+    {% block p %} {% endblock %}
+    {% for item in seq -%}
+        {{ item }}
+    {%- endfor %}<br>
+    {% for item in seq %}
+        {{ item }}
+    {% endfor %}<br>
+    {% for k,v in d | dictsort(false,'key') | reverse%}
+        {{ k,v }}
+    {% endfor %}
+</body>
+</html>

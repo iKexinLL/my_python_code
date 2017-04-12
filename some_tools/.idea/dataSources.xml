@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="3373673065">
+    <data-source source="LOCAL" name="chkuser" uuid="1cd71365-48ca-43b9-aa7d-7e0e419a609a">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://10.163.170.33:5432/jlbdbi</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="dwa" uuid="de74de61-d30d-4993-be07-0cafe828d669">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://10.163.170.33:5432/jlbdbi</jdbc-url>
+    </data-source>
+  </component>
+</project>

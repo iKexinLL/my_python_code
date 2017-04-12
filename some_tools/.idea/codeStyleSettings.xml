@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectCodeStyleSettingsManager">
+    <option name="PER_PROJECT_SETTINGS">
+      <value>
+        <SqlCodeStyleSettings>
+          <option name="NEW_LINE_BEFORE_QUERY_INSIDE_PARENTHESIS" value="true" />
+          <option name="NEW_LINE_BEFORE_QUERY_INSIDE_DML" value="true" />
+          <option name="WRAP_INSIDE_SELECT" value="2" />
+          <option name="WRAP_INSIDE_JOIN_EXPRESSION" value="5" />
+          <option name="WRAP_INSIDE_GROUP_BY" value="2" />
+        </SqlCodeStyleSettings>
+        <XML>
+          <option name="XML_LEGACY_SETTINGS_IMPORTED" value="true" />
+        </XML>
+        <codeStyleSettings language="SQL">
+          <option name="KEEP_LINE_BREAKS" value="false" />
+          <option name="KEEP_FIRST_COLUMN_COMMENT" value="true" />
+          <option name="SPACE_WITHIN_PARENTHESES" value="true" />
+        </codeStyleSettings>
+      </value>
+    </option>
+    <option name="PREFERRED_PROJECT_CODE_STYLE" value="1" />
+  </component>
+</project>

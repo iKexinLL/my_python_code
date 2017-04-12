@@ -1,0 +1,34 @@
+<!--required=""字段保证了不为空的情况-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--<meta http-equiv="refresh" content="5;{{ url_for('login') }}">指定时间刷新到指定url-->
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='login_style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <section id="content">
+            <form action="{{ url_for('login') }}", method="post">
+                <h1>Login Form</h1>
+                <div>
+                    <input type="text" placeholder="Username" required="" id="username" name="username"/>
+                </div>
+                <div>
+                    <input type="password" placeholder="Password" required="" id="password" name="password"/>
+                </div>
+                <div>
+                    <input type="submit" value="Log in">
+                    <a href="{{ url_for('register') }}">Register</a>
+                    <a href="#">Lost your password?</a>
+                </div>
+                    {% for message in get_flashed_messages() %}
+                    <div class="flash">{{ message }}</div>
+                    {% endfor %}
+            </form>
+        </section>
+
+    </div>
+</body>
+</html>

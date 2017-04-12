@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="chkuser" uuid="1cd71365-48ca-43b9-aa7d-7e0e419a609a">
+      <secret-storage>master_key</secret-storage>
+      <user-name>chkuser</user-name>
+      <schema-pattern>jlbdbi.chkuser jlbdbi.dim jlbdbi.dwa jlbdbi.dwi jlbdbi.dwv jlbdbi.pg_catalog jlbdbi.public</schema-pattern>
+      <default-schemas>jlbdbi.chkuser jlbdbi.dim jlbdbi.dwa jlbdbi.dwi jlbdbi.dwv jlbdbi.public</default-schemas>
+    </data-source>
+    <data-source name="dwa" uuid="de74de61-d30d-4993-be07-0cafe828d669">
+      <secret-storage>master_key</secret-storage>
+      <user-name>dwa</user-name>
+      <schema-pattern>jlbdbi.dwa jlbdbi.dwi jlbdbi.dwv jlbdbi.pg_catalog jlbdbi.public</schema-pattern>
+      <default-schemas>jlbdbi.dwa jlbdbi.dwi jlbdbi.dwv jlbdbi.public</default-schemas>
+    </data-source>
+  </component>
+</project>
