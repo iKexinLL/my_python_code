@@ -140,6 +140,43 @@ class Image:
         pass
 
 
+    def resize(self, width = None, height = None):
+        '''
+        想象一下可能的情况
+        1.width和height均为空,那么原对象不变,返回False
+        2.width和height均大于原对象的值,那么只要将width和height赋给__width和__height就可以了
+          不涉及到__data和__colors的变化
+        3.如果width和height中有一个小于原对象中的值,那么就要进行对比,然后删除了
+        '''
+        if width is None and height is None:
+            return False
+        if width is None:
+            width = self.width
+        if height is None:
+            height = self.height
+        if width >= self.width and height >= self.height:
+            '''
+            如果所给长宽大于默认,则其背景均为默认背景,不需改变
+            '''
+            self.__width = width
+            self.__height = height
+            return True
+
+        self.__width = width 
+        self.__height = height 
+        for x, y in list(self.__data.keys()):
+            if x >= self.width or y >= self.height:
+                del self.__data[(x, y)]
+        self.__colors = set(self.__data.values()) | {self.__background}
+        return True
+
+        
+        
+            
+            
+
+
+
 
 
 
