@@ -65,3 +65,29 @@ def echo(value=None):
 >>> Don't forget to clean up when 'close()' is called.        
 '''
            
+### 例子2 对于文件通配符的处理
+
+if sys.platform.startswith("win"):
+    def get_files(names):
+        for name in names:
+            if os.path.isfile(name): # 1.如果name为文件则输出文件名称
+                yield name 
+            else: # 2.如果name不是文件,则使用glob进行分析
+                for file in glob.iglob(name):
+                    if not os.path.isfile(file): # 3.如果使用glob解析仍不是文件
+                        continue                 # (一般为文件夹),则略过
+                    yield file # 4.返回了按照Unix解析路径的文件结果
+else:
+    def get_files(names):
+        '''
+        这里使用圆括号创建了一个生成器表达式.
+        '''
+        return (file for file in names if os.path.isfile(file))
+
+'''
+>>> for file in get_files([r'D:\python35\*.exe']):
+        print(file)
+>>> D:\python35\python.exe
+D:\python35\pythonw.exe
+D:\python35\Removepywin32.exe
+'''
