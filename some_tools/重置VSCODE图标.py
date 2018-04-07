@@ -2,8 +2,10 @@
 import shutil
 import os
 
+# 要替换的图标路径
 path_source = r'D:\Program Files (x86)\Microsoft VS Code\code_file.ico'
 
+# vscode的路径
 path_target = r'D:\Program Files (x86)\Microsoft VS Code\resources\app\resources\win32\code_file.ico'
 
 # 删除 target文件

@@ -1,37 +1,12 @@
-# encoding=utf-8
-"""
-Created on 2016/9/12 19:43
-author: iKexinLL
-尝试根据IP判断目前是在家里还是在公司,然后进行代理切换
-来自:http://www.au92.com/archives/shi-yong-P-y-t-h-o-n-gei-I-E-she-zhi-dai-li.html
-备用:http://mt.sohu.com/20160117/n434810017.shtml
-这么写仍然需要重新打开浏览器,或者打开"代理设置",仍不够自动化,所以要修改一下(按照备用里面说明:
-"如果不手动打开IE设置里的局域网设置窗口的话，所有代理设置是不生效的。这是为什么呢？"
-After the script runs the browsers will still have the old proxy stored in-memory, so you need to restart them so they can re-read the new proxy settings from the registry
-"""
+
+
+'''
+修改计算逻辑为读取注册表是否开启了代理
+'''
 
 import socket
 import win32api
 import win32con
-
-myname = socket.getfqdn(socket.gethostname())
-myaddr = socket.gethostbyname_ex(
-    myname)  # 公司返回 ('IKexinLL', [], ['169.254.162.68', '192.168.81.111', '10.161.252.160'])
-pathInReg = 'Software\Microsoft\Windows\CurrentVersion\Internet Settings'
-
-
-def change_proxy(addr):
-    d = {}
-
-    if '10.161.252.173' in myaddr[2] or '10.161.252.132' in myaddr[2] or '127.0.0.1' in myaddr[2]:  # 公司ip
-        d['ProxyServer'] = '10.161.32.26:8080'
-        d['ProxyOverride'] = '*.local;10.161.*.*;10.163.*.*;192.168.8.*;127.0.0.1;<local>'
-        d['ProxyEnable'] = 1
-    else:
-        d['ProxyEnable'] = 0
-
-    return d
-
 
 # 新增代码
 def refresh():
@@ -46,8 +21,32 @@ def refresh():
     internet_set_option(0, internet_option_settings_changed, 0, 0)
 
 
+d = {}
+d['ProxyServer'] = '10.161.72.126:808'
+d['ProxyOverride'] = '*.local;127.0.0.1;account.jetbrains.com;resharper-plugins.jetbrains.com'
+d['ProxyEnable'] = 1
+
 if __name__ == '__main__':
-    d = change_proxy(myaddr)
+    pathInReg = 'Software\Microsoft\Windows\CurrentVersion\Internet Settings'
+    key = win32api.RegOpenKey(win32con.HKEY_CURRENT_USER, pathInReg, 0, win32con.KEY_ALL_ACCESS)
+
+    # 获取当前代理是否开启
+    # isProxyEnable[1] 为开启
+    # isProxyEnable[0] 为关闭
+    isProxyEnable = win32api.RegQueryValueEx(key, 'ProxyEnable')
+
+    if isProxyEnable[0] == 0:
+        d['ProxyServer'] = '10.161.72.126:808'
+        d['ProxyOverride'] = '*.local;127.0.0.1;account.jetbrains.com;resharper-plugins.jetbrains.com'
+        d['ProxyEnable'] = 1
+        
+        proxy_info = '代理已经打开'
+
+    else:
+        d['ProxyEnable'] = 0
+        proxy_info = '代理已经关闭'
+
+
     for k, v in d.items():
         key = win32api.RegOpenKey(win32con.HKEY_CURRENT_USER, pathInReg, 0, win32con.KEY_ALL_ACCESS)
         # print(key,k,0,v)
@@ -58,17 +57,79 @@ if __name__ == '__main__':
     
     print('\a')
     #弹出一个提示框,表示代理已经修改
-    win32api.MessageBox(0,'代理已经修改','提示',win32con.MB_OK)
+    win32api.MessageBox(0,proxy_info,'提示',win32con.MB_OK)
+
+'''
+
+    # 监视代理
+# 确保这些 *.local;127.0.0.1;account.jetbrains.com;resharper-plugins.jetbrains.com
+# 网址处于无法联网状态
+# 如果代理处于打开状态,则设置例外
+# 监控间隔 先设置1秒吧
+# 如果在设置中,删除了"对于下列字符开头....."中的内容
+# 则 ProxyOverride 就不会存在,导致程序错误
+
+import os
+import sys
+import time
+import win32api
+import win32con
+
+oldProxyInfo = ''
+newProxyInfo = ''
+
+# 获取进程信息
+
+def GetInfo():
+    d = {}
+    d['ProxyOverride'] = '*.local;127.0.0.1;account.jetbrains.com;resharper-plugins.jetbrains.com'
+    d['pathInReg'] = 'Software\Microsoft\Windows\CurrentVersion\Internet Settings'
+    d['key'] = win32api.RegOpenKey(win32con.HKEY_CURRENT_USER, d['pathInReg'], 0, win32con.KEY_ALL_ACCESS)
+    return d
+
+def Monitor(d):
+    try:
+        while (True):
+            time.sleep(1)
+            tempInfo = win32api.RegEnumKeyExW(d['key'])
+            isProxyEnable = win32api.RegQueryValueEx(d['key'], 'ProxyEnable')
+            proxyOverrideInfo = win32api.RegQueryValueEx(d['key'], 'ProxyOverride')[0]
+            isSettProxyOverride = (proxyOverrideInfo == d['ProxyOverride'])
+            if (isProxyEnable[0] == 1 and not isSettProxyOverride):
+                print('yes')
+                win32api.RegSetValueEx(d['key'], 'ProxyOverride', 0, win32con.REG_SZ, d['ProxyOverride'])
+                refresh()
+            else:
+                print('no')
+                continue
+    finally:
+        win32api.RegCloseKey(d['key'])
+
+def refresh():
+    import ctypes
+
+    internet_option_refresh = 37
+    internet_option_settings_changed = 39
+
+    internet_set_option = ctypes.windll.Wininet.InternetSetOptionW
+
+    internet_set_option(0, internet_option_refresh, 0, 0)
+    internet_set_option(0, internet_option_settings_changed, 0, 0)
+
+
+
+if __name__ == '__main__':
+    d = GetInfo()
+    Monitor(d)
     
-
 '''
 
-i = 0
-d3 = {}
-while True:
-    name = win32api.RegEnumValue(key,i) #获取此项里面的每项名称和值
-    d3[name[0]] = name[1:]
-    i += 1
 
-# win32api.RegEnumKeyExW(key) # 获取当前项中的分项名称
-'''
+
+
+
+
+   
+
+
+

@@ -5,7 +5,7 @@ author: iKexinLL
 找到ipython中的style
 """
 
-path = r'E:\my_work\bonc\gp_function\dwi下的function'
+path = r'E:\code\my_python_code\some_tools'
 
 import os
 

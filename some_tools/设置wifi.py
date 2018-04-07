@@ -8,8 +8,8 @@ import os
 
 #开启
 net_start = 'netsh wlan set hostednetwork mode=allow ssid={0} key={1}'
-name = 'xukexin'
-password = '12345678'
+name = 'testwifi_h'
+password = 'kong123456'
 print(net_start.format(name, password))
 os.system(net_start.format(name, password))
 os.system('netsh wlan start hostednetwork')
