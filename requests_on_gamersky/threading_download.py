@@ -16,6 +16,8 @@ import os
 import re
 from bs4 import BeautifulSoup
 
+import gui_for_download
+
 
 class ThreadUrl(threading.Thread):
 
@@ -82,9 +84,11 @@ def get_url_and_file_name(soup, url_pages):
     d = {}
     h = lambda x: str(x) if int(x) > 9 else '0' + str(x)
 
-    if all_p[-1].find('div', 'page_css'):
-        if all_p[-1].find('div', 'page_css').find_all('a')[-1].text == '下一页':
-            url_pages.append(all_p[-1].find('div', 'page_css').find_all('a')[-1]['href'])
+    # 这么判断对于 http://www.gamersky.com/ent/201807/1072244.shtml 无效
+    # 所以修改为用soup判断
+    if soup.find('div', 'page_css'):
+        if soup.find('div', 'page_css').find_all('a')[-1].text == '下一页':
+            url_pages.append(soup.find('div', 'page_css').find_all('a')[-1]['href'])
 
     # 情况2,当有图片没有说明时,且第一个p仅为文字时使用
     upper_title = ''
@@ -142,6 +146,8 @@ def main():
 
     # first_url = r'http://www.gamersky.com/ent/201805/1046795.shtml'
     first_url = r'http://www.gamersky.com/ent/201807/1072380.shtml'
+
+    first_url = gui_for_download.judge_url()
 
     root_save_path = r'e:\temp'
     img_save_path = os.path.join(root_save_path,
