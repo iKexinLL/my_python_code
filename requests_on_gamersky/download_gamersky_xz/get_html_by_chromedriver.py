@@ -65,7 +65,7 @@ class SpiderGamersky:
                 print('无"下一页"元素, 停止循环, page: ' + str(page_now))
                 break
 
-            # self.__get_forthcoming_urls()
+            self.__get_forthcoming_urls()
 
             if element_ul and element_page and page_now < download_page:
                 # next_page_button = self._browser.find_element_by_partial_link_text('下一页')

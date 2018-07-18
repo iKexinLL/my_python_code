@@ -19,7 +19,7 @@ from download_gamersky_xz.get_html_by_chromedriver import SpiderGamersky
 root_url = r'http://www.gamersky.com/ent/xz/'
 IF_USE_PORTABLE_DISK = False
 FLAG_URL_FILE_NAME = 'downloaded_url.txt'
-
+IMG_FORMATS = ['GIF','JPG','PNG','BMP','JPEG']
 
 # def delete_path_files(path):
 #     if os.path.exists(path):
@@ -135,7 +135,7 @@ def get_forthcoming_urls(download_page=5):
     print('开始对比...')
     forthcoming_urls = mid_urls.difference(downloaded_urls)
 
-    # print('对比结果为: ' + str(forthcoming_urls))
+    print('对比结果为: ' + str(len(forthcoming_urls)) + '个网址需要获取图片')
     return forthcoming_urls
 
 
@@ -176,7 +176,11 @@ def get_url_and_file_info(soup, url_pages):
 
         elif temp_p.img:
             pic_num += 1
-            pic_name = h(pic_page) + h(pic_num) + '.' + temp_p.img['src'].rsplit('.', 1)[-1]
+            pic_format = temp_p.img['src'].rsplit('.', 1)[-1]
+            if pic_format in IMG_FORMATS:
+                pic_name = h(pic_page) + h(pic_num) + '.' + pic_format
+            else:
+                pic_name = h(pic_page) + h(pic_num) + '.' + 'jpg'
 
             mid_url = temp_p.img['src']
 
@@ -190,7 +194,7 @@ def main():
     pic_path_info = {}
     pic_name_info = {}
     file_root_path = folder_path_handle(if_use_portable_disk=IF_USE_PORTABLE_DISK)
-    forthcoming_urls = get_forthcoming_urls(0)
+    forthcoming_urls = get_forthcoming_urls(2)
 
     print('开始下载图片信息')
     for forthcoming_url in forthcoming_urls:
