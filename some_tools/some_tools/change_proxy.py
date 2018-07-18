@@ -9,6 +9,7 @@
 import socket
 import win32api
 import win32con
+import re 
 
 # 新增代码
 def refresh():
@@ -31,7 +32,10 @@ d['ProxyEnable'] = 1
 if __name__ == '__main__':
     pathInReg = 'Software\Microsoft\Windows\CurrentVersion\Internet Settings'
     key = win32api.RegOpenKey(win32con.HKEY_CURRENT_USER, pathInReg, 0, win32con.KEY_ALL_ACCESS)
-
+    
+    flag_http_in_file = '0'
+    p = re.compile('\[https*\]')
+    
     # 获取当前代理是否开启
     # isProxyEnable[1] 为开启
     # isProxyEnable[0] 为关闭
@@ -42,12 +46,52 @@ if __name__ == '__main__':
         d['ProxyOverride'] = '*.local;127.0.0.1;account.jetbrains.com;resharper-plugins.jetbrains.com'
         d['ProxyEnable'] = 1
         
+        # 修改 C:\Users\kongp\.gitconfig 
+        # 删除Github代理
+        with open(r'C:\Users\kongp\.gitconfig', 'r') as f:
+            tp = f.readlines()
+        
+        for line_num, i in enumerate(tp):
+            if re.match(p, i):
+                flag_http_in_file = '1'
+        
+        if flag_http_in_file == '1':
+            pass
+        else:
+            with open(r'C:\Users\kongp\.gitconfig', 'a') as f:
+                f.write('\n[http]\n')
+                f.write('    proxy = 10.161.72.126:808\n')
+                f.write('[https]\n')
+                f.write('    proxy = 10.161.72.126:808\n')
+
+
         proxy_info = '代理已经打开'
 
     else:
         d['ProxyEnable'] = 0
         proxy_info = '代理已经关闭'
 
+        del_line_nums = []
+        res_tp = []
+        # 修改 C:\Users\kongp\.gitconfig 
+        # 删除Github代理
+        with open(r'C:\Users\kongp\.gitconfig', 'r') as f:
+            tp = f.readlines()
+        
+        for line_num, i in enumerate(tp):
+            if re.match(p, i):
+                del_line_nums.append(line_num)
+                del_line_nums.append(line_num+1)
+
+        for line_num, line in enumerate(tp):
+            if line_num in del_line_nums:
+                pass
+            else:
+                res_tp.append(line)
+        
+        with open(r'C:\Users\kongp\.gitconfig', 'w') as f:
+            for i in res_tp:
+                f.write(i)
 
     for k, v in d.items():
         key = win32api.RegOpenKey(win32con.HKEY_CURRENT_USER, pathInReg, 0, win32con.KEY_ALL_ACCESS)
@@ -57,9 +101,6 @@ if __name__ == '__main__':
 
     refresh()
     
-    # 修改 C:\Users\kongp\.gitconfig 
-    # with open(r'C:\Users\kongp\.gitconfig', 'w') as f:
-    #     prin
     print('\a')
     # 弹出一个提示框,表示代理已经修改
     win32api.MessageBox(0,proxy_info,'提示',win32con.MB_OK)
