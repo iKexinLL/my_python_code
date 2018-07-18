@@ -149,7 +149,7 @@ def main():
 
     first_url = gui_for_download.judge_url()
 
-    root_save_path = r'e:\temp'
+    root_save_path = r'e:\temp\img_save'
     img_save_path = os.path.join(root_save_path,
                                  '_'.join(first_url.rsplit('.', 1)[0].split('/')[3:6]))
 

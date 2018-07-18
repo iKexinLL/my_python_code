@@ -2,6 +2,8 @@
 
 '''
 修改计算逻辑为读取注册表是否开启了代理
+由于Github for windows需要切换代理,
+所以修改程序,添加了对文件的修改
 '''
 
 import socket
@@ -55,8 +57,11 @@ if __name__ == '__main__':
 
     refresh()
     
+    # 修改 C:\Users\kongp\.gitconfig 
+    # with open(r'C:\Users\kongp\.gitconfig', 'w') as f:
+    #     prin
     print('\a')
-    #弹出一个提示框,表示代理已经修改
+    # 弹出一个提示框,表示代理已经修改
     win32api.MessageBox(0,proxy_info,'提示',win32con.MB_OK)
 
 '''
