@@ -8,3 +8,5 @@ requests_on_gamersky/test_error/get_html_by_chromedriver.py
 requests_on_gamersky/test_error/__init__.py
 *.xml
 requests_on_gamersky/.idea/workspace.xml
+requests_on_gamersky/.idea/workspace.xml
+requests_on_gamersky/.idea/inspectionProfiles/Project_Default.xml
