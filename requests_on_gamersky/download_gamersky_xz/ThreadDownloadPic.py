@@ -8,11 +8,10 @@ __desc__ = 利用queue进行多线程下载的基类
 """
 
 import threading
-import queue
 import re
 import requests
 import os
-
+import time
 
 class ThreadDownloadPic(threading.Thread):
     """
@@ -38,8 +37,12 @@ class ThreadDownloadPic(threading.Thread):
         self.pic_path_info = pic_path_info
         self.pic_name_info = pic_name_info
 
+    def time_sleep(self, secs=0.1):
+        time.sleep(secs)
+
     def run(self):
         while True:
+            self.time_sleep()
             try:
                 url = self.que.get()
                 print(url)
@@ -57,8 +60,14 @@ class ThreadDownloadPic(threading.Thread):
 
                 temp_path = os.path.join(self.img_root_path, img_save_path, img_name)
 
-                if not os.path.exists(os.path.join(self.img_root_path, img_save_path)):
-                    os.makedirs(os.path.join(self.img_root_path, img_save_path))
+                # 由于多线程的存在,导致了可能一起创建文件夹
+                # 所以给这个步骤加上一个检测
+                # 忽略文件创建的错误
+                try:
+                    if not os.path.exists(os.path.join(self.img_root_path, img_save_path)):
+                        os.makedirs(os.path.join(self.img_root_path, img_save_path))
+                except FileExistsError:
+                    pass
 
                 if os.path.isfile(temp_path):
                     os.remove(temp_path)
@@ -70,13 +79,13 @@ class ThreadDownloadPic(threading.Thread):
                 self.que.task_done()
 
             except Exception as e:
-                print('这里报错?')  # -> 是的
                 print('这里报错?\n' + str(e)
-                    + 'img_save_path is: ' + str(img_save_path)
+                    + '\n' + 'img_save_path is: ' + str(img_save_path)
                     + '\n' + 'img_name is: ' + str(img_name)
                     + '\n' + 'temp_path is: ' + str(temp_path)
                     + '\n' + 'url is: ' + str(url)
                     + '\n' + '-------------' )
+                break
                 # 这个是由于有个图片的最后一个文字是?,导致系统报错
                 # 然后这个queue就无法停下来
                 # 所以我尝试用sys.exit强行终止这个问题

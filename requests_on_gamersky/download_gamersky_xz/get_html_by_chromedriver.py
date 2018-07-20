@@ -14,6 +14,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
+import re
+
 
 class SpiderGamersky:
 
@@ -25,6 +27,7 @@ class SpiderGamersky:
         chrome_path = r'D:\program\chromedriver\chromedriver.exe'
         self._browser = webdriver.Chrome(executable_path=chrome_path)
         self._browser.get(self._root_url)
+        self.p = re.compile('ent/\d{6}/')
 
     def __handle_page(self, download_page=0):
         """
@@ -49,10 +52,16 @@ class SpiderGamersky:
         # con是一个一个展现的
         # locator_con = (By.CLASS_NAME, 'con')
 
+        # 20180720 添加一个判断
+        # 对于201503之前的图片不下载
+        # 当获取到201503时,终止循环
+
+
         # 循环点击下一页,直到没有下一页为止
         # 需要等待数据完全载入后判断
         while 1:
             # 这个是判断当前页面是否加载完毕
+
             element_ul = WebDriverWait(self._browser, 10).until(
                 EC.presence_of_element_located(locator_ul)
             )
@@ -65,9 +74,10 @@ class SpiderGamersky:
                 print('无"下一页"元素, 停止循环, page: ' + str(page_now))
                 break
 
-            self.__get_forthcoming_urls()
+            download_flag = self.__get_forthcoming_urls()
 
-            if element_ul and element_page and page_now < download_page:
+            if element_ul and element_page \
+                    and page_now < download_page and download_flag == '1':
                 # next_page_button = self._browser.find_element_by_partial_link_text('下一页')
                 self._browser.find_element_by_link_text('下一页').click()
                 page_now += 1
@@ -94,8 +104,13 @@ class SpiderGamersky:
             # download_title = class_title.find_element_by_tag_name('a').get_attribute('title')
             # download_txt = class_txt.text
 
-            self._forthcoming_urls.add(forthcoming_pic_url)
+            if re.findall(self.p, forthcoming_pic_url):
+                pic_date = re.findall(self.p, forthcoming_pic_url)[0][4:10]
+
+                self._forthcoming_urls.add(forthcoming_pic_url)
             # self._d_pic_info.update()
+
+        return '1' if pic_date >= '201503' else '0'
 
     @staticmethod
     def get_all_forthcoming_urls(download_page):
