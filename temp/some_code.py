@@ -7,6 +7,11 @@
 # os.walk() 遍历, os.listdir()不会
 
 import sys 
+import test1
+
+def test():
+    test1.test_1_init()
+
 
 def main():
     if len(sys.argv) == 1 or sys.argv[1] in {"-h","--help"}:
@@ -24,4 +29,4 @@ def main():
 
 
 
-main()
+test()

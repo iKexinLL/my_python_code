@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c8cccd78-e77e-4eea-8323-e9849f3aa20d" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../programming_in_python/Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../programming_in_python/Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/download_gamersky_xz/ThreadDownloadPic.py" beforeDir="false" afterPath="$PROJECT_DIR$/download_gamersky_xz/ThreadDownloadPic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/download_gamersky_xz/get_html_by_chromedriver.py" beforeDir="false" afterPath="$PROJECT_DIR$/download_gamersky_xz/get_html_by_chromedriver.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/download_gamersky_xz/get_xz_download_urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/download_gamersky_xz/get_xz_download_urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../temp/some_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/../temp/some_code.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,7 +17,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/requests_on_gamersky$get_xz_download_urls.coverage" NAME="get_xz_download_urls Coverage Results" MODIFIED="1531903516168" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/download_gamersky_xz" />
+    <SUITE FILE_PATH="coverage/requests_on_gamersky$get_xz_download_urls.coverage" NAME="get_xz_download_urls Coverage Results" MODIFIED="1532488319726" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/download_gamersky_xz" />
     <SUITE FILE_PATH="coverage/requests_on_gamersky$get_html_by_chromedriver__1_.coverage" NAME="get_html_by_chromedriver (1) Coverage Results" MODIFIED="1531897142461" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/download_gamersky_xz" />
     <SUITE FILE_PATH="coverage/requests_on_gamersky$123.coverage" NAME="123 Coverage Results" MODIFIED="1531792421360" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/use_chromedriver" />
     <SUITE FILE_PATH="coverage/requests_on_gamersky$get_html_by_chromedriver.coverage" NAME="get_html_by_chromedriver Coverage Results" MODIFIED="1531795026513" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/use_chromedriver" />
@@ -39,11 +41,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="get_html_by_chromedriver.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="get_html_by_chromedriver.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/download_gamersky_xz/get_html_by_chromedriver.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="71" selection-start-line="71" selection-end-line="71" />
+            <state relative-caret-position="1254">
+              <caret line="63" selection-start-line="63" selection-end-line="63" />
               <folding>
                 <element signature="e#160#190#0" expanded="true" />
               </folding>
@@ -54,17 +56,20 @@
       <file leaf-file-name="ThreadDownloadPic.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/download_gamersky_xz/ThreadDownloadPic.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="62" column="45" lean-forward="true" selection-start-line="62" selection-start-column="45" selection-end-line="62" selection-end-column="45" />
+            <state relative-caret-position="1188">
+              <caret line="58" column="72" selection-start-line="58" selection-start-column="72" selection-end-line="58" selection-end-column="72" />
+              <folding>
+                <element signature="e#125#141#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="get_xz_download_urls.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="get_xz_download_urls.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/download_gamersky_xz/get_xz_download_urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1074">
-              <caret line="141" column="4" selection-start-line="141" selection-start-column="4" selection-end-line="141" selection-end-column="4" />
+            <state relative-caret-position="352">
+              <caret line="26" column="18" selection-start-line="26" selection-start-column="18" selection-end-line="26" selection-end-column="18" />
               <folding>
                 <element signature="e#214#223#0" expanded="true" />
               </folding>
@@ -83,9 +88,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>d_pic</find>
-      <find>url_pages</find>
-      <find>img_save_path</find>
       <find>get</find>
       <find>erro</find>
       <find>re_complie</find>
@@ -113,11 +115,15 @@
       <find>test_error</find>
       <find>self.__get_forthcoming_urls()</find>
       <find>get_soup</find>
+      <find>'''</find>
+      <find>oup.find('div', 'page_css')</find>
+      <find>IMG_FORMATS</find>
     </findStrings>
     <replaceStrings>
       <replace>re_compile</replace>
       <replace>locator_ul</replace>
       <replace>element_p3</replace>
+      <replace>&quot;&quot;&quot;</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -150,8 +156,8 @@
         <option value="$PROJECT_DIR$/test/get_xz_download_urls.py" />
         <option value="$PROJECT_DIR$/test/get_html_by_chromedriver.py" />
         <option value="$PROJECT_DIR$/download_gamersky_xz/get_html_by_chromedriver.py" />
-        <option value="$PROJECT_DIR$/download_gamersky_xz/get_xz_download_urls.py" />
         <option value="$PROJECT_DIR$/download_gamersky_xz/ThreadDownloadPic.py" />
+        <option value="$PROJECT_DIR$/download_gamersky_xz/get_xz_download_urls.py" />
       </list>
     </option>
   </component>
@@ -201,7 +207,7 @@
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://I:/my_python_code/requests_on_gamersky/threading_download.py&#10;delete_path_files&#9;ACTION&#9;null&#10;url_pages&#9;null&#9;null" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../temp" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
@@ -379,7 +385,14 @@
       <option name="project" value="LOCAL" />
       <updated>1531897395341</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="修改了很多逻辑问题&#10;对于添加对于可能不存在标签地方的检测">
+      <created>1532067974085</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1532067974085</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView">
@@ -393,57 +406,56 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1381" height="885" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32922733" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.5010661" side_tool="true" weight="0.32689655" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32965517" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32965517" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4989339" visible="true" weight="0.32689655" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4989339" weight="0.32551724" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32965517" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49590164" visible="true" weight="0.18442933" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4950166" visible="true" weight="0.14512472" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" weight="0.32955405" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49946696" weight="0.32827586" />
       <window_info anchor="right" id="SciView" order="3" weight="0.32955405" />
-      <window_info id="Structure" order="1" sideWeight="0.50409836" side_tool="true" visible="true" weight="0.18442933" />
+      <window_info id="Structure" order="1" sideWeight="0.50498337" side_tool="true" weight="0.18656716" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" x="1" y="308" width="1323" height="299" id="Debug" order="3" weight="0.39724138" />
-      <window_info active="true" anchor="bottom" id="Concurrent Activities Diagram" order="13" visible="true" weight="0.32977304" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Coverage" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" x="0" y="0" width="295" height="685" id="Documentation" order="5" side_tool="true" weight="0.32955405" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="right" id="Coverage" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49946696" weight="0.32827586" />
+      <window_info active="true" anchor="bottom" id="Concurrent Activities Diagram" order="13" visible="true" weight="0.32977304" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info content_ui="combo" id="Project" order="0" weight="0.17762661" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32965517" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49946696" visible="true" weight="0.32827586" />
+      <window_info anchor="bottom" id="Python Console" order="10" weight="0.32965517" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49946696" weight="0.3293348" />
       <window_info anchor="right" x="0" y="0" width="295" height="685" id="Documentation" order="0" side_tool="true" weight="0.32955405" />
       <window_info anchor="right" id="Database" order="5" weight="0.32955405" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32965517" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50053304" side_tool="true" weight="0.3293348" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="right" id="SciView" order="4" show_stripe_button="false" weight="0.32955405" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" x="1" y="308" width="1323" height="299" id="Debug" order="3" weight="0.3986207" />
       <window_info active="true" anchor="bottom" id="Concurrent Activities Diagram" order="13" visible="true" weight="0.32977304" />
-      <window_info anchor="bottom" id="Python Console" order="10" weight="0.32965517" />
+      <window_info id="Favorites" order="2" side_tool="true" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -483,7 +495,8 @@
     <MESSAGE value="添加了一个简单的GUI&#10;修改了判断下一页的逻辑" />
     <MESSAGE value="问题为最后一页判断&quot;下一页&quot;的逻辑错误,导致程序崩溃." />
     <MESSAGE value="修改了&quot;__handle_page&quot;方法中的逻辑&#10;已保证页面可以加载完毕后获取信息&#10;并确保页面可以在未加载&quot;下一页&quot;时,可以退出并获取信息" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改了&quot;__handle_page&quot;方法中的逻辑&#10;已保证页面可以加载完毕后获取信息&#10;并确保页面可以在未加载&quot;下一页&quot;时,可以退出并获取信息" />
+    <MESSAGE value="修改了很多逻辑问题&#10;对于添加对于可能不存在标签地方的检测" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改了很多逻辑问题&#10;对于添加对于可能不存在标签地方的检测" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -532,6 +545,16 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/download_gamersky_xz/get_xz_download_urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2970">
+          <caret line="141" column="4" selection-start-line="141" selection-start-column="4" selection-end-line="141" selection-end-column="4" />
+          <folding>
+            <element signature="e#214#223#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://D:/python35/Lib/site-packages/selenium/webdriver/remote/webdriver.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="9438">
@@ -543,9 +566,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="18" column="14" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
-          <folding>
-            <element signature="e#124#144#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -560,9 +580,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2596">
           <caret line="126" column="12" selection-start-line="60" selection-end-line="126" selection-end-column="12" />
-          <folding>
-            <element signature="e#134#150#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -570,9 +587,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="18" column="14" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
-          <folding>
-            <element signature="e#124#144#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -590,9 +604,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2596">
           <caret line="126" column="12" lean-forward="true" selection-start-line="60" selection-end-line="126" selection-end-column="12" />
-          <folding>
-            <element signature="e#134#150#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -600,9 +611,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="18" column="14" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
-          <folding>
-            <element signature="e#124#144#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -620,9 +628,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2838">
           <caret line="137" column="25" lean-forward="true" selection-start-line="137" selection-start-column="8" selection-end-line="137" selection-end-column="25" />
-          <folding>
-            <element signature="e#134#150#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -630,9 +635,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="18" column="14" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
-          <folding>
-            <element signature="e#124#144#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -653,9 +655,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3322">
           <caret line="158" column="17" selection-start-line="158" selection-start-column="17" selection-end-line="158" selection-end-column="17" />
-          <folding>
-            <element signature="e#134#150#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -746,9 +745,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="367">
           <caret line="18" column="4" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
-          <folding>
-            <element signature="e#124#144#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -759,16 +755,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/threading_download.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-242">
           <caret line="29" column="11" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="11" />
-          <folding>
-            <element signature="e#134#150#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -786,16 +776,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/ThreadDownloadPic.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="13" column="9" lean-forward="true" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
-          <folding>
-            <element signature="e#125#141#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/test/ThreadDownloadPic.py" />
     <entry file="file://D:/python35/Lib/codecs.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="326">
@@ -803,26 +784,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/get_xz_download_urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="243" selection-start-line="243" selection-end-line="243" />
-          <folding>
-            <element signature="e#214#223#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/get_html_by_chromedriver.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-602">
-          <caret line="51" column="46" lean-forward="true" selection-start-line="51" selection-start-column="46" selection-end-line="51" selection-end-column="46" />
-          <folding>
-            <element signature="e#160#190#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/test/get_xz_download_urls.py" />
+    <entry file="file://$PROJECT_DIR$/test/get_html_by_chromedriver.py" />
     <entry file="file://D:/python35/Lib/site-packages/selenium/webdriver/support/expected_conditions.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="41">
@@ -837,29 +800,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/download_gamersky_xz/get_xz_download_urls.py">
+    <entry file="file://$PROJECT_DIR$/download_gamersky_xz/get_html_by_chromedriver.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1074">
-          <caret line="141" column="4" selection-start-line="141" selection-start-column="4" selection-end-line="141" selection-end-column="4" />
+        <state relative-caret-position="1254">
+          <caret line="63" selection-start-line="63" selection-end-line="63" />
           <folding>
-            <element signature="e#214#223#0" expanded="true" />
+            <element signature="e#160#190#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/download_gamersky_xz/ThreadDownloadPic.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="62" column="45" lean-forward="true" selection-start-line="62" selection-start-column="45" selection-end-line="62" selection-end-column="45" />
+        <state relative-caret-position="1188">
+          <caret line="58" column="72" selection-start-line="58" selection-start-column="72" selection-end-line="58" selection-end-column="72" />
+          <folding>
+            <element signature="e#125#141#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/download_gamersky_xz/get_html_by_chromedriver.py">
+    <entry file="file://$PROJECT_DIR$/download_gamersky_xz/get_xz_download_urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="71" selection-start-line="71" selection-end-line="71" />
+        <state relative-caret-position="352">
+          <caret line="26" column="18" selection-start-line="26" selection-start-column="18" selection-end-line="26" selection-end-column="18" />
           <folding>
-            <element signature="e#160#190#0" expanded="true" />
+            <element signature="e#214#223#0" expanded="true" />
           </folding>
         </state>
       </provider>

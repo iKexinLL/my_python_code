@@ -6,13 +6,13 @@ __time__ = '2018/5/12 15:33'
 __author__ = 'Kexin Xu'
 """
 
-import Shape
+# import Shape
 
-p = Shape.Point(3, 4)
+# p = Shape.Point(3, 4)
 
-print(p.print_self_value)
+# print(p.print_self_value)
 
-print(p.distance_from_origin())
+# print(p.distance_from_origin())
 # -----------------------
 
 before = ["Nonmetals",
