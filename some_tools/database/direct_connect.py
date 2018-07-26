@@ -11,11 +11,11 @@ class ConnectGP(object):
     def __init__(self):
         '''
         '''
-        database = 'jlbdbi' 
-        host = '10.163.170.33'
-        user = 'dwa'
-        password = 'D#wa29bonc' 
-        port = '5432'
+        database = '.' 
+        host = '.'
+        user = '.'
+        password = '.'
+        port = '.'
 
         self.conn = psy.connect(
             database = database,
