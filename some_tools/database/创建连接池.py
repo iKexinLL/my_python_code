@@ -15,11 +15,11 @@ class ConnectGP(object):
         # 连接信息
         minconn = 1 # 最小连接数
         maxconn = 5 # 最大连接数
-        database = 'jlbdbi' 
-        host = '10.163.170.33'
-        user = 'dwa'
-        password = 'D#wa29bonc' 
-        port = '5432'
+        database = '.' 
+        host = '.'
+        user = '.'
+        password =.' 
+        port = '.'
 
         self.connect_pool = psypool.SimpleConnectionPool(
             minconn,
