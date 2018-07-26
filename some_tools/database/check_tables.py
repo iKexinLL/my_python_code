@@ -8,7 +8,7 @@ import psycopg2 as psy
 import re
 
 #连接GP库
-conn = psy.connect(database = 'jlbdbi', host = '10.163.170.33', user = 'dwa', password = 'D#wa29bonc', port = '5432')
+conn = psy.connect(database = '.', host = '.', user = '.', password = '.', port = '.')
 cur = conn.cursor()
 
 # 剔除chkuser
