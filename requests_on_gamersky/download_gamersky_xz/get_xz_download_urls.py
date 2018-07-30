@@ -13,8 +13,12 @@ import queue
 import requests
 from bs4 import BeautifulSoup
 
-from download_gamersky_xz.ThreadDownloadPic import ThreadDownloadPic
-from download_gamersky_xz.get_html_by_chromedriver import SpiderGamersky
+try:
+    from download_gamersky_xz.ThreadDownloadPic import ThreadDownloadPic
+    from download_gamersky_xz.get_html_by_chromedriver import SpiderGamersky
+except:
+    import ThreadDownloadPic
+    from get_html_by_chromedriver import SpiderGamersky
 
 # 添加sleep,简单的尝试别被封锁
 import time
@@ -24,7 +28,7 @@ def time_sleep(secs=0.1):
     time.sleep(secs)
 
 
-DOWNLOAD_PAGES = 5
+DOWNLOAD_PAGES = 15
 root_url = r'http://www.gamersky.com/ent/xz/'
 IF_USE_PORTABLE_DISK = False
 FLAG_URL_FILE_NAME = 'downloaded_url.txt'
@@ -234,7 +238,7 @@ def main():
 
     que = queue.Queue()
 
-    # 添加以获取的图片地址
+    # 添加已获取的图片地址
     with open(os.path.join(file_root_path, KNOWN_URLS_FILE_NAME), 'w') as f:
         for base_url, pic_url_or_info in pic_info.items():
             for k, v in pic_url_or_info.items():
@@ -247,7 +251,7 @@ def main():
                     f.write(k + '\n')
 
     print('开始多线程下载图片')
-    for i in range(5):
+    for _ in range(5):
         t = ThreadDownloadPic(que, file_root_path, pic_info, pic_path_info, pic_name_info)
         t.setDaemon(True)
         t.start()
@@ -255,7 +259,7 @@ def main():
     que.join()
 
     print('写入已下载的url')
-    with open(os.path.join(file_root_path, FLAG_URL_FILE_NAME), 'w') as f:
+    with open(os.path.join(file_root_path, FLAG_URL_FILE_NAME), 'a') as f:
         for base_url in pic_info:
             f.write(base_url + '\n')
 

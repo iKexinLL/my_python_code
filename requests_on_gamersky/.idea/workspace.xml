@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c8cccd78-e77e-4eea-8323-e9849f3aa20d" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../programming_in_python/Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../programming_in_python/Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/download_gamersky_xz/get_xz_download_urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/download_gamersky_xz/get_xz_download_urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../temp/some_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/../temp/some_code.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/threading_download.py" beforeDir="false" afterPath="$PROJECT_DIR$/threading_download.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,7 +12,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/requests_on_gamersky$get_xz_download_urls.coverage" NAME="get_xz_download_urls Coverage Results" MODIFIED="1532488319726" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/download_gamersky_xz" />
+    <SUITE FILE_PATH="coverage/requests_on_gamersky$get_xz_download_urls.coverage" NAME="get_xz_download_urls Coverage Results" MODIFIED="1532912654496" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/download_gamersky_xz" />
     <SUITE FILE_PATH="coverage/requests_on_gamersky$get_html_by_chromedriver__1_.coverage" NAME="get_html_by_chromedriver (1) Coverage Results" MODIFIED="1531897142461" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/download_gamersky_xz" />
     <SUITE FILE_PATH="coverage/requests_on_gamersky$123.coverage" NAME="123 Coverage Results" MODIFIED="1531792421360" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/use_chromedriver" />
     <SUITE FILE_PATH="coverage/requests_on_gamersky$get_html_by_chromedriver.coverage" NAME="get_html_by_chromedriver Coverage Results" MODIFIED="1531795026513" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/use_chromedriver" />
@@ -414,15 +409,15 @@
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32965517" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4989339" weight="0.32551724" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32965517" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4950166" visible="true" weight="0.14512472" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4950166" visible="true" weight="0.14739229" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" weight="0.32955405" />
       <window_info anchor="right" id="SciView" order="3" weight="0.32955405" />
       <window_info id="Structure" order="1" sideWeight="0.50498337" side_tool="true" weight="0.18656716" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" x="1" y="308" width="1323" height="299" id="Debug" order="3" weight="0.39724138" />
+      <window_info active="true" anchor="bottom" id="Concurrent Activities Diagram" order="13" visible="true" weight="0.32977304" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Coverage" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -430,32 +425,32 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49946696" weight="0.32827586" />
-      <window_info active="true" anchor="bottom" id="Concurrent Activities Diagram" order="13" visible="true" weight="0.32977304" />
+      <window_info anchor="right" id="Coverage" order="3" side_tool="true" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="0" weight="0.17762661" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32965517" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49946696" visible="true" weight="0.32827586" />
-      <window_info anchor="bottom" id="Python Console" order="10" weight="0.32965517" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49946696" weight="0.3293348" />
       <window_info anchor="right" x="0" y="0" width="295" height="685" id="Documentation" order="0" side_tool="true" weight="0.32955405" />
       <window_info anchor="right" id="Database" order="5" weight="0.32955405" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32965517" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50053304" side_tool="true" weight="0.3293348" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="SciView" order="4" show_stripe_button="false" weight="0.32955405" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" x="1" y="308" width="1323" height="299" id="Debug" order="3" weight="0.3986207" />
       <window_info active="true" anchor="bottom" id="Concurrent Activities Diagram" order="13" visible="true" weight="0.32977304" />
-      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="10" weight="0.32965517" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">

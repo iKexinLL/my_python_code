@@ -78,7 +78,7 @@ def get_url_and_file_name(soup, url_pages):
     :return: 一个字典,存储了图片地址以及图片名称
     '''
     # 用于替换windows文件名称中的违规字符
-    re_compile = '\*|\?|"|<|>|\||\u3000'
+    re_compile = re.compile(r'\*|\?|"|<|>|\||\u3000')
 
     all_p = soup.find_all('p')
     d = {}
@@ -139,7 +139,7 @@ def delete_path_files(path):
 
 
 def main():
-    WEB_ENCODING = 'utf-8'
+    # WEB_ENCODING = 'utf-8'
     que = queue.Queue()
 
     d_pic = {}
@@ -161,7 +161,7 @@ def main():
         soup = get_soup(url)
         d_pic.update(get_url_and_file_name(soup, url_pages))
 
-    for k,v in d_pic.items():
+    for k in d_pic:
         # 这里要研究一下
         # 将item放入队列中。
         #
@@ -171,7 +171,7 @@ def main():
         # que.put(k, block=False, timeout=3)
         que.put(k)
 
-    for i in range(5):
+    for _ in range(5):
         t = ThreadUrl(que, d_pic, img_save_path)
         t.setDaemon(True)
         t.start()
