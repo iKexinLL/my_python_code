@@ -10,6 +10,8 @@ __desc__ = 获取 http://www.gamersky.com/ent/xz/ 中(游民福利)的网页链�
 """
 import os
 import queue
+import sys
+
 import requests
 from bs4 import BeautifulSoup
 
@@ -28,7 +30,7 @@ def time_sleep(secs=0.1):
     time.sleep(secs)
 
 
-DOWNLOAD_PAGES = 15
+DOWNLOAD_PAGES = 1
 root_url = r'http://www.gamersky.com/ent/xz/'
 IF_USE_PORTABLE_DISK = False
 FLAG_URL_FILE_NAME = 'downloaded_url.txt'
@@ -137,14 +139,21 @@ def get_forthcoming_urls(download_page=5):
     print('获取已下载的url')
     downloaded_urls = get_file_for_downloaded_urls()
 
+    spider_gamersky = SpiderGamersky()
     # 在root_url上所获取的所有下载网址
     print('获取gamersky上的url')
-    mid_urls = SpiderGamersky.get_all_forthcoming_urls(download_page)
+    mid_urls = spider_gamersky.get_all_forthcoming_urls(download_page)
 
     print('开始对比...')
     forthcoming_urls = mid_urls.difference(downloaded_urls)
 
+    spider_gamersky.close_chromedriver()
+
     print('对比结果为: ' + str(len(forthcoming_urls)) + '个网址需要获取图片')
+
+    if not forthcoming_urls:
+        sys.exit(0)
+
     return forthcoming_urls
 
 

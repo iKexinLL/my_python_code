@@ -112,9 +112,11 @@ class SpiderGamersky:
 
         return '1' if pic_date >= '201503' else '0'
 
-    @staticmethod
-    def get_all_forthcoming_urls(download_page):
-        return SpiderGamersky().__handle_page(download_page)
+    def get_all_forthcoming_urls(self, download_page):
+        return self.__handle_page(download_page)
+
+    def close_chromedriver(self):
+        self._browser.close()
 
 
 if __name__ == '__main__':
