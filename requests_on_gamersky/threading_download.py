@@ -78,13 +78,16 @@ def get_url_and_file_name(soup, url_pages):
     :return: 一个字典,存储了图片地址以及图片名称
     '''
     # 用于替换windows文件名称中的违规字符
-    re_compile = re.compile(r'\*|\?|"|<|>|\||\u3000')
+    re_compile = re.compile(r'\*|\?|"|<|>|\||\u3000|/')
 
     all_p = soup.find_all('p')
     d = {}
     h = lambda x: str(x) if int(x) > 9 else '0' + str(x)
 
     # 这么判断对于 http://www.gamersky.com/ent/201807/1072244.shtml 无效
+    # if all_p[-1].find('div', 'page_css'):
+    #     if all_p[-1].find('div', 'page_css').find_all('a')[-1].text == '下一页':
+    #         url_pages.append(all_p[-1].find('div', 'page_css').find_all('a')[-1]['href'])
     # 所以修改为用soup判断
     if soup.find('div', 'page_css'):
         if soup.find('div', 'page_css').find_all('a')[-1].text == '下一页':
