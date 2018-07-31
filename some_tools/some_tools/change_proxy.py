@@ -1,4 +1,4 @@
-
+﻿
 
 '''
 修改计算逻辑为读取注册表是否开启了代理
@@ -26,7 +26,7 @@ def refresh():
 
 d = {}
 d['ProxyServer'] = '10.161.72.126:808'
-d['ProxyOverride'] = '*.local;127.0.0.1;account.jetbrains.com;resharper-plugins.jetbrains.com'
+d['ProxyOverride'] = 'local;127.0.0.1;account.jetbrains.com;resharper-plugins.jetbrains.com'
 d['ProxyEnable'] = 1
 
 if __name__ == '__main__':
