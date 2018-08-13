@@ -76,8 +76,6 @@ class ThreadDownloadPic(threading.Thread):
                 with open(temp_path, 'wb') as f:
                     f.write(img_contents)
 
-                self.que.task_done()
-
             except Exception as e:
                 print('这里报错?\n' + str(e)
                     + '\n' + 'img_save_path is: ' + str(img_save_path)
@@ -85,7 +83,10 @@ class ThreadDownloadPic(threading.Thread):
                     + '\n' + 'temp_path is: ' + str(temp_path)
                     + '\n' + 'url is: ' + str(url)
                     + '\n' + '-------------' )
-                break
+                    
+            finally:
+                self.que.task_done()
+
                 # 这个是由于有个图片的最后一个文字是?,导致系统报错
                 # 然后这个queue就无法停下来
                 # 所以我尝试用sys.exit强行终止这个问题

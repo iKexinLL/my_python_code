@@ -10,18 +10,8 @@ __desc__ = 获取 http://www.gamersky.com/ent/xz/ 中(游民福利)的网页链�
 """
 import os
 import queue
-import sys
-
 import requests
 from bs4 import BeautifulSoup
-
-try:
-    from download_gamersky_xz.ThreadDownloadPic import ThreadDownloadPic
-    from download_gamersky_xz.get_html_by_chromedriver import SpiderGamersky
-except:
-    import ThreadDownloadPic
-    from get_html_by_chromedriver import SpiderGamersky
-
 # 添加sleep,简单的尝试别被封锁
 import time
 
@@ -30,7 +20,7 @@ def time_sleep(secs=0.1):
     time.sleep(secs)
 
 
-DOWNLOAD_PAGES = 4
+DOWNLOAD_PAGES = 15
 root_url = r'http://www.gamersky.com/ent/xz/'
 IF_USE_PORTABLE_DISK = False
 FLAG_URL_FILE_NAME = 'downloaded_url.txt'
@@ -139,21 +129,14 @@ def get_forthcoming_urls(download_page=5):
     print('获取已下载的url')
     downloaded_urls = get_file_for_downloaded_urls()
 
-    spider_gamersky = SpiderGamersky()
     # 在root_url上所获取的所有下载网址
     print('获取gamersky上的url')
-    mid_urls = spider_gamersky.get_all_forthcoming_urls(download_page)
+    mid_urls = SpiderGamersky.get_all_forthcoming_urls(download_page)
 
     print('开始对比...')
     forthcoming_urls = mid_urls.difference(downloaded_urls)
 
-    spider_gamersky.close_chromedriver()
-
     print('对比结果为: ' + str(len(forthcoming_urls)) + '个网址需要获取图片')
-
-    if not forthcoming_urls:
-        sys.exit(0)
-
     return forthcoming_urls
 
 
@@ -234,7 +217,7 @@ def main():
     # 20180720记录
     # 201503之前的图片好多都已经挂掉了
     # 所以直接就忽略吧~
-    for url_num, forthcoming_url in enumerate(forthcoming_urls):
+    for forthcoming_url in forthcoming_urls:
         url_pages = [forthcoming_url]
         time_sleep()
         pic_info[forthcoming_url] = {}
@@ -242,7 +225,6 @@ def main():
             soup = get_soup(url)
             print('forthcoming url is ' + url)
             pic_info[forthcoming_url].update(get_url_and_file_info(soup, url_pages))
-        print('------------第%s个网址统计完毕-----------' % str(url_num + 1))
 
     print('图片信息下载完毕')
 
@@ -255,15 +237,14 @@ def main():
                 if k != 'pic_txt' and k != 'pic_title':
                     que.put(k)
 
-                    print('base url is ' + base_url)
-                    pic_path_info[k] = pic_info[base_url].get('pic_title','None')
+                    pic_path_info[k] = pic_info[base_url]['pic_title']
                     pic_name_info[k] = v
 
                     f.write(k + '\n')
 
     print('开始多线程下载图片')
     for _ in range(5):
-        t = ThreadDownloadPic.ThreadDownloadPic(que, file_root_path, pic_info, pic_path_info, pic_name_info)
+        t = ThreadDownloadPic(que, file_root_path, pic_info, pic_path_info, pic_name_info)
         t.setDaemon(True)
         t.start()
 
@@ -287,8 +268,199 @@ def main():
     #         f.write('\n')
 
 
-if __name__ == '__main__':
-    main()
+import threading
+import re
+import requests
+import os
+import time
 
-# d['root_url'] = {'down_url_1':'name_1'
-#                  'down_url_2':'name_2'}
+class ThreadDownloadPic(threading.Thread):
+    """
+    多线程下载类
+    1.下载url集合
+    2.保存的地址
+    3.保存的信息
+    """
+
+    def __init__(self, que, img_root_path, file_info, pic_path_info, pic_name_info):
+        """
+        :param que:需要下载的url集合
+        :param file_info:使用字典来保存的文件信息,k为url地址,v为信息
+        :param img_root_path:要保存的文件根路径
+        :param pic_path_info:图片的路径信息
+        :param pic_name_info:图片的名称信息
+        :return:
+        """
+        threading.Thread.__init__(self)
+        self.que = que
+        self.file_info = file_info
+        self.img_root_path = img_root_path
+        self.pic_path_info = pic_path_info
+        self.pic_name_info = pic_name_info
+
+    def time_sleep(self, secs=0.1):
+        time.sleep(secs)
+
+    def run(self):
+        while True:
+            self.time_sleep()
+            try:
+                url = self.que.get()
+                print(url)
+
+                re_compile = re.compile('\*|\?|"|<|>|\||\u3000')
+
+                # 清除一些没用的和不能使用的标识
+                img_save_path = '_'.join(
+                                re.sub(re_compile, '_',
+                                       self.pic_path_info.get(url) if self.file_info else url).split())
+
+                img_name = '_'.join(
+                                re.sub(re_compile, '_',
+                                       self.pic_name_info[url]).split())
+
+                temp_path = os.path.join(self.img_root_path, img_save_path, img_name)
+
+                # 由于多线程的存在,导致了可能一起创建文件夹
+                # 所以给这个步骤加上一个检测
+                # 忽略文件创建的错误
+                try:
+                    if not os.path.exists(os.path.join(self.img_root_path, img_save_path)):
+                        os.makedirs(os.path.join(self.img_root_path, img_save_path))
+                except FileExistsError:
+                    pass
+
+                if os.path.isfile(temp_path):
+                    os.remove(temp_path)
+
+                img_contents = requests.get(url).content
+                with open(temp_path, 'wb') as f:
+                    f.write(img_contents)
+
+                self.que.task_done()
+
+            except Exception as e:
+                print('这里报错?\n' + str(e)
+                    + '\n' + 'img_save_path is: ' + str(img_save_path)
+                    + '\n' + 'img_name is: ' + str(img_name)
+                    + '\n' + 'temp_path is: ' + str(temp_path)
+                    + '\n' + 'url is: ' + str(url)
+                    + '\n' + '-------------' )
+                break
+                # 这个是由于有个图片的最后一个文字是?,导致系统报错
+                # 然后这个queue就无法停下来
+                # 所以我尝试用sys.exit强行终止这个问题
+                # 结果也不好使~
+                # 结论:下面这句话没用
+                # sys.exit(1)
+
+
+
+from selenium import webdriver
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+
+import re
+
+
+class SpiderGamersky:
+
+    def __init__(self):
+        self._root_url = r'http://www.gamersky.com/ent/xz/'
+        self._forthcoming_urls = set()
+        # self._d_pic_info = {}
+
+        chrome_path = r'D:\program\chromedriver\chromedriver.exe'
+        self._browser = webdriver.Chrome(executable_path=chrome_path)
+        self._browser.get(self._root_url)
+        self.p = re.compile('ent/\d{6}/')
+
+    def __handle_page(self, download_page=0):
+        """
+        经过一些尝试,发现在获取page_num的时候报错:StaleElementReferenceException
+        试过一些办法,发现忽略这个问题是最简单的~
+        所以直接利用循环增长页面
+        :param download_page: 如果传入的数字为0,则将其设置为一个很大的数字~
+        :return:
+        """
+
+        download_page = 999999 if download_page == 0 else download_page
+        page_now = 1
+
+        # 判断数据是否加载完毕
+        locator_ul = (By.CLASS_NAME, 'pictxt,contentpaging')
+        # 传入特定的locator格式,判断下一页是否存在
+        locator_page = (By.LINK_TEXT, '下一页')
+        # 传入特定的locator格式,判断要查询的元素是否加载完毕
+        # 不能用这个判断,貌似这个只会检验第一个con而不是检验最后一个con
+        # (毕竟程序也不知道哪个是最后的con)
+        # 因为程序运行的比网页加载快,所以程序会快于网页达到下个con导致报错
+        # con是一个一个展现的
+        # locator_con = (By.CLASS_NAME, 'con')
+
+        # 20180720 添加一个判断
+        # 对于201503之前的图片不下载
+        # 当获取到201503时,终止循环
+
+
+        # 循环点击下一页,直到没有下一页为止
+        # 需要等待数据完全载入后判断
+        while 1:
+            # 这个是判断当前页面是否加载完毕
+
+            element_ul = WebDriverWait(self._browser, 10).until(
+                EC.presence_of_element_located(locator_ul)
+            )
+
+            try:
+                element_page = WebDriverWait(self._browser, 10).until(
+                    EC.presence_of_element_located(locator_page)
+                )
+            except TimeoutException:
+                print('无"下一页"元素, 停止循环, page: ' + str(page_now))
+                break
+
+            download_flag = self.__get_forthcoming_urls()
+
+            if element_ul and element_page \
+                    and page_now < download_page and download_flag == '1':
+                # next_page_button = self._browser.find_element_by_partial_link_text('下一页')
+                self._browser.find_element_by_link_text('下一页').click()
+                page_now += 1
+                # 不能用这个,理由见上面
+                # element_locator_con = WebDriverWait(self._browser, 10).until(
+                #     EC.presence_of_element_located(locator_con)
+                # )
+
+            else:
+                break
+
+        return self._forthcoming_urls
+
+    def __get_forthcoming_urls(self):
+
+        all_class_cons = self._browser.find_elements_by_class_name('con')[1:]
+
+        for class_con in all_class_cons:
+            class_title = class_con.find_elements_by_tag_name('div')[0]
+            # class_txt = class_con.find_elements_by_tag_name('div')[1]
+
+            forthcoming_pic_url = class_title.find_element_by_tag_name('a').get_attribute('href')
+            # print(forthcoming_pic_url)
+            # download_title = class_title.find_element_by_tag_name('a').get_attribute('title')
+            # download_txt = class_txt.text
+
+            if re.findall(self.p, forthcoming_pic_url):
+                pic_date = re.findall(self.p, forthcoming_pic_url)[0][4:10]
+
+                self._forthcoming_urls.add(forthcoming_pic_url)
+            # self._d_pic_info.update()
+
+        return '1' if pic_date >= '201503' else '0'
+
+    @staticmethod
+    def get_all_forthcoming_urls(download_page):
+        return SpiderGamersky().__handle_page(download_page)
+        
