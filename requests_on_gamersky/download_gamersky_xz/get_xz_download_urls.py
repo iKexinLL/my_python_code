@@ -11,6 +11,7 @@ __desc__ = 获取 http://www.gamersky.com/ent/xz/ 中(游民福利)的网页链�
 import os
 import queue
 import sys
+import time
 
 import requests
 from bs4 import BeautifulSoup
@@ -256,7 +257,7 @@ def main():
                     que.put(k)
 
                     print('base url is ' + base_url)
-                    pic_path_info[k] = pic_info[base_url].get('pic_title','None')
+                    pic_path_info[k] = pic_info[base_url].get('pic_title','None_' + time.strftime('%Y%m%d_%H%M%S'))
                     pic_name_info[k] = v
 
                     f.write(k + '\n')

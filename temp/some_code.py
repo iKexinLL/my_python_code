@@ -28,5 +28,5 @@ def main():
     print('after ' + Language)
 
 
-
+print("请问")
 test()
