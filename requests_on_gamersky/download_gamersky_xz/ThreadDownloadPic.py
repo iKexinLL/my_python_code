@@ -47,7 +47,7 @@ class ThreadDownloadPic(threading.Thread):
                 url = self.que.get()
                 print(url)
 
-                re_compile = re.compile('\*|\?|"|<|>|\||\u3000')
+                re_compile = re.compile(r'\*|\?|"|<|>|\||\u3000')
 
                 # 清除一些没用的和不能使用的标识
                 img_save_path = '_'.join(

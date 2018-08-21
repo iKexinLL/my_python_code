@@ -27,7 +27,7 @@ class SpiderGamersky:
         chrome_path = r'D:\program\chromedriver\chromedriver.exe'
         self._browser = webdriver.Chrome(executable_path=chrome_path)
         self._browser.get(self._root_url)
-        self.p = re.compile('ent/\d{6}/')
+        self.p = re.compile(r'ent/\d{6}/')
 
     def __handle_page(self, download_page=0):
         """
@@ -120,4 +120,4 @@ class SpiderGamersky:
 
 
 if __name__ == '__main__':
-    SpiderGamersky.get_all_forthcoming_urls(0)
+    SpiderGamersky().get_all_forthcoming_urls(0)
