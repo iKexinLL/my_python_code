@@ -19,8 +19,8 @@ import re
 
 class SpiderGamersky:
 
-    def __init__(self):
-        self._root_url = r'http://www.gamersky.com/ent/xz/'
+    def __init__(self, root_url):
+        self._root_url = root_url
         self._forthcoming_urls = set()
         # self._d_pic_info = {}
 
@@ -28,6 +28,11 @@ class SpiderGamersky:
         self._browser = webdriver.Chrome(executable_path=chrome_path)
         self._browser.get(self._root_url)
         self.p = re.compile(r'ent/\d{6}/')
+
+    def __wait_element(self, locator, browser, timeout=10):
+        return WebDriverWait(self._browser, 10).until(
+                EC.presence_of_element_located(locator)
+            )
 
     def __handle_page(self, download_page=0):
         """
@@ -62,14 +67,10 @@ class SpiderGamersky:
         while 1:
             # 这个是判断当前页面是否加载完毕
 
-            element_ul = WebDriverWait(self._browser, 10).until(
-                EC.presence_of_element_located(locator_ul)
-            )
+            element_ul = self.__wait_element(locator=locator_ul, browser=self._browser)
 
-            try:
-                element_page = WebDriverWait(self._browser, 10).until(
-                    EC.presence_of_element_located(locator_page)
-                )
+            try: 
+                element_page = self.__wait_element(locator=locator_page, browser=self._browser)
             except TimeoutException:
                 print('无"下一页"元素, 停止循环, page: ' + str(page_now))
                 break
@@ -120,4 +121,6 @@ class SpiderGamersky:
 
 
 if __name__ == '__main__':
-    SpiderGamersky().get_all_forthcoming_urls(0)
+    # SpiderGamersky().get_all_forthcoming_urls(0)
+    pass
+    

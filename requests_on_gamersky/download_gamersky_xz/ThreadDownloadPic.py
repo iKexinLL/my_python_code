@@ -21,7 +21,7 @@ class ThreadDownloadPic(threading.Thread):
     3.保存的信息
     """
 
-    def __init__(self, que, img_root_path, file_info, pic_path_info, pic_name_info):
+    def __init__(self, que, img_root_path, file_info, pic_path_info, pic_name_info, f_write):
         """
         :param que:需要下载的url集合
         :param file_info:使用字典来保存的文件信息,k为url地址,v为信息
@@ -36,9 +36,13 @@ class ThreadDownloadPic(threading.Thread):
         self.img_root_path = img_root_path
         self.pic_path_info = pic_path_info
         self.pic_name_info = pic_name_info
+        self.f_write = f_write
 
     def time_sleep(self, secs=0.1):
         time.sleep(secs)
+
+    def f_write_urls(self, url):
+        self.f_write.write(url + '\n')
 
     def run(self):
         while True:
@@ -76,13 +80,15 @@ class ThreadDownloadPic(threading.Thread):
                 with open(temp_path, 'wb') as f:
                     f.write(img_contents)
 
+                self.f_write_urls(url)
+
             except Exception as e:
                 print('这里报错?\n' + str(e)
                     + '\n' + 'img_save_path is: ' + str(img_save_path)
                     + '\n' + 'img_name is: ' + str(img_name)
                     + '\n' + 'temp_path is: ' + str(temp_path)
                     + '\n' + 'url is: ' + str(url)
-                    + '\n' + '-------------' )
+                    + '\n' + '-------------')
                     
             finally:
                 self.que.task_done()
