@@ -14,7 +14,14 @@ import sys
 import datetime
 
 import requests
+import re
 from bs4 import BeautifulSoup
+
+# 添加sleep,简单的尝试别被封锁
+import time
+
+def time_sleep(secs=0.05):
+    time.sleep(secs)
 
 try:
     from download_gamersky_xz.ThreadDownloadPic import ThreadDownloadPic
@@ -22,13 +29,6 @@ try:
 except:
     import ThreadDownloadPic
     from get_html_by_chromedriver import SpiderGamersky
-
-# 添加sleep,简单的尝试别被封锁
-import time
-
-def time_sleep(secs=0.1):
-    time.sleep(secs)
-
 
 
 DOWNLOAD_PAGES = 1
@@ -38,7 +38,7 @@ IF_USE_PORTABLE_DISK = False
 FLAG_URL_FILE_NAME = 'downloaded_url.txt'
 IMG_FORMATS = ['GIF', 'JPG', 'PNG', 'BMP', 'JPEG']
 NOW_DATE = datetime.datetime.strftime(datetime.datetime.now(),'%Y%m%d')
-
+re_compile = re.compile(r'\*|\?|"|<|>|\||\u3000')
 
 def judge_wd():
     import wmi
@@ -77,16 +77,20 @@ def get_image_folder_path(root_url, if_use_portable_disk=IF_USE_PORTABLE_DISK):
 
     return folder_root_path
 
-def get_file_for_downloaded_urls(file_root_path):
+
+def get_parent_path(img_root_path):
+    return '\\'.join(img_root_path.split('\\')[:-1]) 
+
+def get_file_for_downloaded_urls(img_root_path):
     """
     读取已经下载过(downloaded_url.txt)的的网址
     """
 
-    file_flag_path = os.path.join('\\'.join(file_root_path.split('\\')[:-1]), FLAG_URL_FILE_NAME)
+    file_flag_path = os.path.join(get_parent_path(img_root_path), FLAG_URL_FILE_NAME)
     # 如果当前文件不存在,则创建文件
     if not os.path.isfile(file_flag_path):
         # windows上,python没有os.mknod
-        # os.mknod(os.path.join(file_root_path, FLAG_URL_FILE_NAME))
+        # os.mknod(os.path.join(img_root_path, FLAG_URL_FILE_NAME))
         with open(file_flag_path, 'w', encoding='utf-8') as f:
             f.close()
     
@@ -128,7 +132,7 @@ def get_url_and_file_info(soup, url_pages):
             url_pages.append(soup.find('div', 'page_css').find_all('a')[-1]['href'])
 
         # 确认当前图片是第几页
-        pic_page = soup.find('div', 'page_css').b.text
+        pic_page = h(soup.find('div', 'page_css').b.text)
     else:
         pic_page = '01'
 
@@ -151,18 +155,28 @@ def get_url_and_file_info(soup, url_pages):
 
     for p_num, temp_p in enumerate(all_p):
 
-        if pic_page == '1' and p_num == 0:
-            pic_txt = ''.join(temp_p.text.split())
+        if pic_page == '01' and p_num == 0:
+            pic_txt = '_'.join(temp_p.text.split())
             d['pic_txt'] = pic_txt
             d['pic_title'] = pic_title
 
         elif temp_p.img:
             pic_num += 1
+            pre_name = h(pic_page) + h(pic_num)
+
+            # 20180823_185932_添加了将图片下方的说明作为图片名称的尝试
+            if temp_p.text != '':
+                # 删除 \n,\xa0等一些其它标识
+                mid_name = pre_name + '_' + '_'.join(temp_p.text.split())
+            elif temp_p.text == '':
+                mid_name = pre_name
+            
             pic_format = temp_p.img['src'].rsplit('.', 1)[-1]
-            if pic_format in IMG_FORMATS:
-                pic_name = h(pic_page) + h(pic_num) + '.' + pic_format
+            
+            if pic_format.upper() in IMG_FORMATS:
+                pic_name = mid_name + '.' + pic_format
             else:
-                pic_name = h(pic_page) + h(pic_num) + '.' + 'jpg'
+                pic_name = mid_name + '.' + 'jpg'
 
             mid_url = temp_p.img['src']
 
@@ -170,60 +184,93 @@ def get_url_and_file_info(soup, url_pages):
 
     return d
 
+def replace_path_flag(path):
+    return '_'.join(
+            re.sub(re_compile, '_', path).split())
+
 def main():
     # 获取要下载的url
     for root_url in root_urls:
         pic_info = {}
-        pic_path_info = {}
-        pic_name_info = {}
 
         part_name = root_url.split('/')[-1]
 
         # 图片要存储的根目录
-        file_root_path = get_image_folder_path(root_url, if_use_portable_disk=IF_USE_PORTABLE_DISK)
+        img_root_path = get_image_folder_path(root_url, if_use_portable_disk=IF_USE_PORTABLE_DISK)
 
         # downloaded_url.txt位置
         print('获取%s已下载的url'%part_name)
-        downloaded_urls = get_file_for_downloaded_urls(file_root_path)
+        downloaded_urls = get_file_for_downloaded_urls(img_root_path)
 
         print('获取gamersky上的url')
         spider_gamersky = SpiderGamersky(root_url)
+        
+        # forthcoming_urls中存储的是
+        # http://www.gamersky.com/ent/201808/1089829.shtml
+        # http://www.gamersky.com/ent/201808/1091650.shtml
+        # 最上层网址
         forthcoming_urls = spider_gamersky.get_all_forthcoming_urls(DOWNLOAD_PAGES)
+        
         spider_gamersky.close_chromedriver()
 
         print('开始下载%s图片信息'%part_name)
         cnt = 0
         for forthcoming_url in forthcoming_urls:
+            # url_pages存储的是
+            # http://www.gamersky.com/ent/201808/1089829.shtml
+            # http://www.gamersky.com/ent/201808/1089829_2.shtml
+            # 中间网址
             url_pages = [forthcoming_url]
             # time_sleep()
             pic_info[forthcoming_url] = {}
+            # 这里会循环查找网址内的"下一页"
+            # 并放入到url_pages中 --> 为什么呢?
+            # 因为指向的同一地址
             for url in url_pages:
                 if url not in downloaded_urls:
                     soup = get_soup(url)
                     print('forthcoming url is ' + url)
-                    pic_info[forthcoming_url].update(get_url_and_file_info(soup, url_pages))
-                    cnt += 1
+                    temp_url_info = get_url_and_file_info(soup, url_pages)
+                    pic_info[forthcoming_url].update(temp_url_info)
+                    cnt += len(temp_url_info)
                 else:
                     continue
             print('------------已统计%d个图片需要下载-----------' % cnt)
 
         # 添加已获取的图片地址
+        # 20180827_151455 修改这里传入的参数
+        # 由url + 字典 修改为 整个字典
+        # 这样传入ThreadDownloadPic类只需一个参数
+        # 也方便了对于路径的存储
 
         que = queue.Queue()
 
         for base_url, pic_url_or_info in pic_info.items():
             for k, v in pic_url_or_info.items():
-                if k != 'pic_txt' and k != 'pic_title':
-                    que.put(k)
+                temp_path = pic_info[base_url].get('pic_title','None_' + time.strftime('%Y%m%d_%H%M%S'))
+                img_path = os.path.join(img_root_path, 
+                                replace_path_flag(temp_path))
+                img_name = os.path.join(img_path, 
+                                replace_path_flag(v))
 
-                    pic_path_info[k] = pic_info[base_url].get('pic_title','None_' + time.strftime('%Y%m%d_%H%M%S'))
-                    pic_name_info[k] = v
+                if k != 'pic_txt' and k != 'pic_title':
+                    res_d = {'url':k, 'img_path':img_path, 'img_name':img_name}
+                    que.put(res_d)
+                
+                # 增加了对与pic_txt的写入操作
+                elif k == 'pic_txt':
+                    if not os.path.isdir(img_path):
+                        os.mkdir(img_path)
+
+                    with open(os.path.join(img_path,
+                                            'pic_txt.txt'), 'w', encoding='utf-8') as f:
+                        f.write(v)
 
 
         print('开始多线程下载图片')
-        with open(os.path.join(file_root_path, FLAG_URL_FILE_NAME), 'a') as f:
+        with open(os.path.join(get_parent_path(img_root_path), FLAG_URL_FILE_NAME), 'a') as f:
             for _ in range(5):
-                t = ThreadDownloadPic.ThreadDownloadPic(que, file_root_path, pic_info, pic_path_info, pic_name_info, f)
+                t = ThreadDownloadPic.ThreadDownloadPic(que, f)
                 t.setDaemon(True)
                 t.start()
 

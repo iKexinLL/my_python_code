@@ -21,21 +21,16 @@ class ThreadDownloadPic(threading.Thread):
     3.保存的信息
     """
 
-    def __init__(self, que, img_root_path, file_info, pic_path_info, pic_name_info, f_write):
+    def __init__(self, que, f_write):
         """
         :param que:需要下载的url集合
-        :param file_info:使用字典来保存的文件信息,k为url地址,v为信息
-        :param img_root_path:要保存的文件根路径
-        :param pic_path_info:图片的路径信息
-        :param pic_name_info:图片的名称信息
+        :param que.url:url地址
+        :param que.img_path:图片的路径信息
+        :param que.img_name:图片的名称信息
         :return:
         """
         threading.Thread.__init__(self)
         self.que = que
-        self.file_info = file_info
-        self.img_root_path = img_root_path
-        self.pic_path_info = pic_path_info
-        self.pic_name_info = pic_name_info
         self.f_write = f_write
 
     def time_sleep(self, secs=0.1):
@@ -48,46 +43,32 @@ class ThreadDownloadPic(threading.Thread):
         while True:
             self.time_sleep()
             try:
-                url = self.que.get()
-                print(url)
-
-                re_compile = re.compile(r'\*|\?|"|<|>|\||\u3000')
-
-                # 清除一些没用的和不能使用的标识
-                img_save_path = '_'.join(
-                                re.sub(re_compile, '_',
-                                       self.pic_path_info.get(url) if self.file_info else url).split())
-
-                img_name = '_'.join(
-                                re.sub(re_compile, '_',
-                                       self.pic_name_info[url]).split())
-
-                temp_path = os.path.join(self.img_root_path, img_save_path, img_name)
+                res_d = self.que.get()
+                print(res_d['url'])
 
                 # 由于多线程的存在,导致了可能一起创建文件夹
                 # 所以给这个步骤加上一个检测
                 # 忽略文件创建的错误
                 try:
-                    if not os.path.exists(os.path.join(self.img_root_path, img_save_path)):
-                        os.makedirs(os.path.join(self.img_root_path, img_save_path))
+                    if not os.path.exists(res_d['img_path']):
+                        os.makedirs(res_d['img_path'])
                 except FileExistsError:
                     pass
 
-                if os.path.isfile(temp_path):
-                    os.remove(temp_path)
+                if os.path.isfile(res_d['img_name']):
+                    os.remove(res_d['img_name'])
 
-                img_contents = requests.get(url).content
-                with open(temp_path, 'wb') as f:
+                img_contents = requests.get(res_d['url']).content
+                with open(res_d['img_name'], 'wb') as f:
                     f.write(img_contents)
 
-                self.f_write_urls(url)
+                self.f_write_urls(res_d['url'])
 
             except Exception as e:
                 print('这里报错?\n' + str(e)
-                    + '\n' + 'img_save_path is: ' + str(img_save_path)
-                    + '\n' + 'img_name is: ' + str(img_name)
-                    + '\n' + 'temp_path is: ' + str(temp_path)
-                    + '\n' + 'url is: ' + str(url)
+                    + '\n' + 'img_save_path is: ' + str(res_d['img_path'])
+                    + '\n' + 'img_name is: ' + str(res_d['img_name'])
+                    + '\n' + 'url is: ' + str(res_d['url'])
                     + '\n' + '-------------')
                     
             finally:
