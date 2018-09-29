@@ -25,7 +25,16 @@ class SpiderGamersky:
         # self._d_pic_info = {}
 
         chrome_path = r'D:\program\chromedriver\chromedriver.exe'
-        self._browser = webdriver.Chrome(executable_path=chrome_path)
+        try:
+            self._browser = webdriver.Chrome(executable_path=chrome_path)
+
+            self._browser.set_page_load_timeout(20)
+            self._browser.set_script_timeout(20)
+        except TimeoutException as e:
+            print('链接超时')
+            print(e)
+            self.close_chromedriver()
+
         self._browser.get(self._root_url)
         self.p = re.compile(r'ent/\d{6}/')
 

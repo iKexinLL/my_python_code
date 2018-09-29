@@ -11,7 +11,6 @@ __desc__ = 获取 http://www.gamersky.com/ent/xz/ 中(游民福利)的网页链�
 import os
 import queue
 import sys
-import datetime
 
 import requests
 import re
@@ -31,13 +30,15 @@ except:
     from get_html_by_chromedriver import SpiderGamersky
 
 
-DOWNLOAD_PAGES = 1
+DOWNLOAD_PAGES = 10
 root_urls = [r'http://www.gamersky.com/ent/qw',
         r'http://www.gamersky.com/ent/xz']
 IF_USE_PORTABLE_DISK = False
 FLAG_URL_FILE_NAME = 'downloaded_url.txt'
 IMG_FORMATS = ['GIF', 'JPG', 'PNG', 'BMP', 'JPEG']
-NOW_DATE = datetime.datetime.strftime(datetime.datetime.now(),'%Y%m%d')
+
+NOW_DATE = time.strftime('%Y%m%d')
+NOW_TIME = time.strftime('%Y%m%d_%H%M%S')
 re_compile = re.compile(r'\*|\?|"|<|>|\||\u3000')
 
 def judge_wd():
@@ -51,6 +52,10 @@ def judge_wd():
     wmiServer = wmi.WMI()
 
     LogicalDisk = wmiServer.Win32_LogicalDisk()
+
+    for ld in LogicalDisk:
+        if ld.VolumeName == 'My Passport':
+            return True
 
     for ld in LogicalDisk:
         if ld.VolumeName == SoftName:
@@ -214,7 +219,8 @@ def main():
         spider_gamersky.close_chromedriver()
 
         print('开始下载%s图片信息'%part_name)
-        cnt = 0
+        cnt_pics = 0
+        cnt_urls = 0
         for forthcoming_url in forthcoming_urls:
             # url_pages存储的是
             # http://www.gamersky.com/ent/201808/1089829.shtml
@@ -232,10 +238,12 @@ def main():
                     print('forthcoming url is ' + url)
                     temp_url_info = get_url_and_file_info(soup, url_pages)
                     pic_info[forthcoming_url].update(temp_url_info)
-                    cnt += len(temp_url_info)
+                    cnt_pics += len(temp_url_info)
+                    cnt_urls += 1
                 else:
                     continue
-            print('------------已统计%d个图片需要下载-----------' % cnt)
+            print('------------已统计%d个网址-----------' % cnt_urls)
+            print('------------已统计%d个图片需要下载-----------' % cnt_pics)
 
         # 添加已获取的图片地址
         # 20180827_151455 修改这里传入的参数
@@ -247,7 +255,7 @@ def main():
 
         for base_url, pic_url_or_info in pic_info.items():
             for k, v in pic_url_or_info.items():
-                temp_path = pic_info[base_url].get('pic_title','None_' + time.strftime('%Y%m%d_%H%M%S'))
+                temp_path = pic_info[base_url].get('pic_title','None_' + NOW_TIME)
                 img_path = os.path.join(img_root_path, 
                                 replace_path_flag(temp_path))
                 img_name = os.path.join(img_path, 
