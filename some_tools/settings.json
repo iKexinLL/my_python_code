@@ -1,0 +1,39 @@
+{
+    "files.autoSave": "onFocusChange",
+    "editor.fontSize": 18,
+    "editor.fontFamily": "Source Code Pro",
+    "editor.acceptSuggestionOnEnter": "off",
+    "git.autofetch": true,
+    "workbench.startupEditor": "none",
+    "extensions.ignoreRecommendations": false,
+    "terminal.integrated.fontSize": 18,
+
+    
+    // "terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",
+    // "terminal.integrated.shellArgs.windows": ["/k","chcp 65001"],
+
+
+    "terminal.integrated.shell.windows": "C:\\Windows\\SysWOW64\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "terminal.integrated.shellArgs.windows": ["-NoExit", "/c", "chcp.com 65001"],
+    
+    "workbench.editor.enablePreview": false,
+    "java.home": "C:\\Program Files\\Java\\jdk1.8.0_181",
+    "TodoParser": {
+        "markers": ["NOTE:", "REMINDER:", ["FIXME", "Warning"]]
+    },
+    "todo-tree.defaultHighlight": {
+        "foreground": "green",
+        "type": "none"
+    },
+    "todo-tree.customHighlight": {
+        "TODO": {},
+        "FIXME": {}
+    },
+    "breadcrumbs.enabled": true,
+    "java.errors.incompleteClasspath.severity": "ignore",
+    "files.exclude": {
+        "**/*.meta": true
+    },
+    "TortoiseSVN.tortoiseSVNProcExePath": "D:\\Program Files\\TortoiseSVN\\bin\\TortoiseProc.exe",
+    "open-in-browser.default": "Chrome"
+}
