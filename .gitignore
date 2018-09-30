@@ -9,3 +9,5 @@ requests_on_gamersky/new/download_gamersky_xz/ThreadDownloadPic.py
 requests_on_gamersky/new/download_gamersky_xz/failed_download_urls.txt
 requests_on_gamersky/new/download_gamersky_xz/get_html_by_chromedriver.py
 requests_on_gamersky/new/download_gamersky_xz/get_xz_download_urls.py
+MyFlask/*
+temp/*
